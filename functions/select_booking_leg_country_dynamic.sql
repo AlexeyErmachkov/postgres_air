@@ -12,7 +12,7 @@ SELECT departure_airport, booking_id, is_returning
   WHERE departure_airport IN 
             (SELECT airport_code
 			 FROM airport WHERE iso_country=$$|| quote_literal(p_country) ||
-	  $$ AND bl.booking_id IN 
+	  $$ ) AND bl.booking_id IN 
             (SELECT booking_id FROM booking
 			WHERE update_ts>$$|| quote_literal(p_updated)||$$)$$;
 			end;
