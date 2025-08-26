@@ -7,10 +7,13 @@ create function passenger_age_category_select (p_limit int)
 returns setof passenger_age_cat_record
 as
 $body$
+begin	
 return query
-EXECUTE $$SELECT
+EXECUTE $$
+SELECT
 	passenger_id,
-     $$||age_category_dyn('age')||$$ AS age_category
-from passenger LIMIT $$p_limit::text$$;
+     age_category_dyn('age') AS age_category
+from passenger LIMIT $$|| p_limit::text || $$
+$$;		
 end;
 $body$ language plpgsql;
