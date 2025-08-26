@@ -11,7 +11,7 @@ FROM booking
 WHERE lower(email) like $$||quote_literal(p_email||'%')
 INTO v_booking_ids;
 
-v_sql=$$SELECT DISTINCT b.booking_id, b.booking_ref, b.booking_name, b.email
+v_sql=$$SELECT DISTINCT b.booking_id, b.booking_ref, b.booking_name, b.account_id, b.email
 from booking b
 JOIN  booking_leg bl USING(booking_id)
 JOIN flight f USING (flight_id)
